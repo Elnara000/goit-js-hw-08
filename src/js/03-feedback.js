@@ -14,9 +14,13 @@ populateInputs()
 function populateInputs() {
     const savedInputs = localStorage.getItem(STORAGE_KEY);
     if(savedInputs) {
-        console.log('poluchilos`');
-        input.value = JSON.parse(savedInputs).email;
-        textarea.value = JSON.parse(savedInputs).message;
+        try {
+            input.value = JSON.parse(savedInputs).email;
+            textarea.value = JSON.parse(savedInputs).message;
+        } catch(error){
+            console.log(error.name);
+            console.log(error.message);
+        }
     }
 }
 
