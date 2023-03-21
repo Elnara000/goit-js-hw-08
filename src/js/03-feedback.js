@@ -14,15 +14,21 @@ populateInputs()
 
 function populateInputs() {
     const savedInputs = localStorage.getItem(STORAGE_KEY);
-    const parsedInputs = JSON.parse(savedInputs);
+    let parsedInputs = {};
+    try {        
+        parsedInputs = JSON.parse(savedInputs);
+    } catch (error) {
+        console.log(error.name);
+        console.log(error.message);
+    }    
     
-    if(parsedInputs[input.name] !== '' && parsedInputs[textarea.name] !== '') {
+    if(parsedInputs.email) {  
+        input.value = parsedInputs.email;         
         
-            input.value = JSON.parse(savedInputs).email;
-            textarea.value = JSON.parse(savedInputs).message;
-       
+    } 
+    if (parsedInputs.message) {
+        textarea.value = parsedInputs.message;           
     }
-    
 }
 
 function onFormInput(e) {   
